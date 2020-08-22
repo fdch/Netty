@@ -242,11 +242,11 @@ running bw, f 68;
 #X floatatom 31 479 5 0 0 0 - - -;
 #X obj 140 333 print to-q;
 #X msg 90 447 bang \; pd dsp 1;
-#X msg 15 526 \; \$1-server symbol 164.107.176.180 \; \$1-port 10000
+#X msg 15 526 \; \$1-server symbol localhost \; \$1-port 10000
 \; \$1-this-caller 1 \; \$1-nchan 1 \; \$1-block 64;
 #X obj 366 140 loadbang;
 #X msg 366 184 \; \$1-server symbol \$2 \; \$1-port \$3;
-#X obj 366 162 list append \$0 164.107.176.181 10000;
+#X obj 366 162 list append \$0 localhost 10000;
 #X connect 7 0 9 0;
 #X connect 7 1 9 1;
 #X connect 9 2 29 0;
