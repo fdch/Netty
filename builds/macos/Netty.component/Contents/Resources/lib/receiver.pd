@@ -1,0 +1,42 @@
+#N canvas 20 38 561 486 12;
+#X obj 31 31 cnv 15 118 388 \$2-receiver \$2-receiver-set empty 20
+12 0 14 -233017 -66577 0;
+#X floatatom 45 82 3 0 100 0 - #0-lvl-set #0-lvl;
+#X obj 45 103 bng 15 250 50 0 \$0-mute \$0-mute-set empty 0 0 0 12
+-262144 -1 -1;
+#X obj 38 137 hsl 20 12 1 9 0 0 \$0-pan \$0-pan-set empty 0 0 0 10
+-262144 -1 -1 950 1;
+#X obj 42 151 bng 12 250 50 0 \$0-ctr-pan \$0-ctr-pan-set empty 0 0
+0 12 -262144 -1 -1;
+#X obj 119 68 vu 8 80 \$0-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 64 99 mute;
+#X obj 134 68 vu 8 80 \$0-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 71 81 level;
+#X floatatom 115 152 2 1 99 0 - #0-ch1-set #0-ch1;
+#X floatatom 131 152 2 1 99 0 - #0-ch2-set #0-ch2;
+#X text 40 163 mono;
+#X obj 73 165 tgl 15 0 \$0-mono \$0-mono-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X text 96 151 ch;
+#X text 33 120 balance;
+#X floatatom 97 237 7 0 0 0 - #0-packets-in-set #0-packets-in;
+#X floatatom 97 259 5 0 0 0 - #0-dropouts-set #0-dropouts;
+#X floatatom 95 214 5 0 0 0 - #0-nfill-set #0-nfill;
+#X text 57 215 fill;
+#X obj 99 280 bng 15 250 50 0 \$2-reset \$2-reset-set empty 17 7 0
+10 -262144 -1 -1;
+#X text 58 278 reset;
+#X floatatom 33 340 5 0 0 0 - #0-remote-sr-set #0-remote-sr;
+#X floatatom 86 341 3 0 0 0 - #0-remote-ch-set #0-remote-ch;
+#X floatatom 33 398 3 0 0 0 - #0-remote-blk-set #0-remote-blk;
+#X text 32 306 sample rate, f 6;
+#X text 33 363 block size, f 5;
+#X text 80 320 channels;
+#X text 82 363 mbits per sec, f 7;
+#X floatatom 85 398 5 0 0 0 - #0-remote-mbits-set #0-remote-mbits;
+#X text 32 258 dropouts;
+#X floatatom 69 53 5 0 0 0 - #0-fifo-size-set #0-fifo-size;
+#X text 32 53 FIFO;
+#X text 38 236 packets;
+#X text 34 194 ---readouts---;
+#X coords 0 486 1 485 120 390 0;

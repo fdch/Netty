@@ -1,0 +1,4 @@
+type effect;
+bus 2 2;
+code nSud;
+description Infos.txt;

@@ -1,0 +1,651 @@
+#N canvas 5 0 1265 473 10;
+#X declare -path lib/quacktrip~ -path lib;
+#X text 994 184 server;
+#X symbolatom 997 204 32 0 0 0 - #0-server-set #0-server;
+#X obj 1026 45 tgl 15 0 \$0-onoff \$0-onoff-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 1043 122 vradio 15 1 0 3 \$0-blksel \$0-blksel-set empty 0 -8
+0 10 -262144 -1 -1 2;
+#X text 1062 118 64;
+#X text 1060 135 128;
+#X text 1061 149 256;
+#X obj 996 119 vradio 15 1 0 3 \$0-nchan \$0-nchan-set empty 0 -8 0
+10 -262144 -1 -1 1;
+#X text 1013 116 0;
+#X text 1014 131 1;
+#X text 1014 146 2;
+#X text 990 98 chnls;
+#X text 1040 89 block size, f 5;
+#X obj 1095 150 tgl 15 0 \$0-2x \$0-2x-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X text 1092 129 2X;
+#X floatatom 1032 227 6 1000 100000 0 - #0-port-set #0-port;
+#X text 997 226 port;
+#X floatatom 1162 227 2 1 8 0 - #0-this-caller-set #0-this-caller;
+#X text 1085 227 this caller;
+#X floatatom 1119 100 3 0 100 0 - #0-lvl-set #0-lvl;
+#X obj 1119 121 bng 15 250 50 0 \$0-mute \$0-mute-set empty 0 0 0 12
+-262144 -1 -1;
+#X obj 1193 85 vu 8 80 \$0-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 1138 118 mute;
+#X obj 1205 85 vu 8 80 \$0-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X obj 1120 150 tgl 15 0 \$0-test empty empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 1136 148 test;
+#X text 1145 100 level;
+#X floatatom 1013 347 5 0 0 0 - #0-local-sr-set #0-local-sr;
+#X floatatom 1075 347 3 0 0 0 - #0-local-ch-set #0-local-ch;
+#X floatatom 1126 347 3 0 0 0 - #0-local-blk-set #0-local-blk;
+#X text 982 346 out;
+#X text 1010 313 sample rate, f 6;
+#X text 1120 314 block size, f 5;
+#X text 1058 326 channels;
+#X floatatom 1173 347 5 0 0 0 - #0-local-mbits-set #0-local-mbits;
+#X text 1167 311 mbits per sec, f 7;
+#X text 1023 70 --- AUDIO TO SEND ---;
+#X text 1020 277 ------- readouts --------;
+#N canvas 475 79 605 619 stuff 0;
+#X obj 275 544 clone -s 1 receiver.guts 8 \$0;
+#X obj 110 23 declare -path lib/quacktrip~ -path lib;
+#X obj 39 94 setctl \$0-onoff;
+#X obj 37 119 setctl \$0-server;
+#X obj 34 220 setctl \$0-blksel;
+#X obj 34 198 setctl \$0-nchan;
+#X obj 33 244 setctl \$0-2x;
+#N canvas 458 86 681 644 input-audio 0;
+#X obj 489 257 t b;
+#X obj 489 204 f;
+#X obj 489 282 f;
+#X msg 603 281 0;
+#X obj 489 234 moses 1;
+#X obj 603 253 t b f;
+#X obj 569 214 moses 1;
+#X msg 394 166 \; pd dsp 1;
+#X obj 9 89 hip~ 3;
+#X obj 481 16 r \$0-lvl;
+#X msg 481 41 set \$1;
+#X obj 481 66 s \$0-lvl-set;
+#X obj 331 49 r \$0-lvl;
+#X obj 331 81 f;
+#X obj 568 185 r \$0-lvl;
+#X obj 489 308 s \$0-lvl;
+#X obj 489 177 r \$0-mute;
+#X obj 331 106 max 0;
+#X text 509 145 MUTE logic;
+#X obj 323 210 line~;
+#X obj 323 170 pack 0 30, f 5;
+#X obj 8 247 *~;
+#X obj 199 366 abs~;
+#X obj 199 391 slop~ 0 0 0.3 0 1e+09;
+#X obj 535 395 metro 100;
+#X obj 196 429 snapshot~;
+#X obj 196 454 rmstodb;
+#X obj 196 479 moses 1;
+#X msg 197 514 -100;
+#X obj 244 509 - 88;
+#X obj 113 250 *~;
+#X obj 536 367 loadbang;
+#X obj 364 364 abs~;
+#X obj 364 389 slop~ 0 0 0.3 0 1e+09;
+#X obj 361 427 snapshot~;
+#X obj 361 452 rmstodb;
+#X obj 361 477 moses 1;
+#X msg 362 512 -100;
+#X obj 409 507 - 88;
+#X obj 195 550 s \$0-vu1;
+#X obj 360 548 s \$0-vu2;
+#X obj 303 134 expr pow($f1*0.02 \, 4);
+#X obj 44 376 outlet~;
+#X obj 108 378 outlet~;
+#X obj 53 117 osc~ 660;
+#X obj 35 171 -~;
+#X obj 35 215 *~ 0;
+#X obj 9 65 adc~ 1;
+#X obj 112 84 hip~ 3;
+#X obj 138 166 -~;
+#X obj 138 210 *~ 0;
+#X obj 198 178 r \$0-test;
+#X obj 112 60 adc~ 2;
+#X obj 53 142 *~ 0.03;
+#X obj 167 139 *~ 0.03;
+#X obj 166 114 osc~ 880;
+#X connect 0 0 2 0;
+#X connect 1 0 4 0;
+#X connect 2 0 15 0;
+#X connect 3 0 15 0;
+#X connect 4 0 0 0;
+#X connect 4 1 5 0;
+#X connect 5 0 3 0;
+#X connect 6 1 2 1;
+#X connect 8 0 21 0;
+#X connect 8 0 45 1;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 13 0;
+#X connect 13 0 17 0;
+#X connect 14 0 1 1;
+#X connect 14 0 6 0;
+#X connect 16 0 1 0;
+#X connect 17 0 41 0;
+#X connect 19 0 21 1;
+#X connect 19 0 30 1;
+#X connect 20 0 19 0;
+#X connect 21 0 42 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 25 0;
+#X connect 24 0 25 0;
+#X connect 24 0 34 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 27 0 28 0;
+#X connect 27 1 29 0;
+#X connect 28 0 39 0;
+#X connect 29 0 39 0;
+#X connect 30 0 43 0;
+#X connect 30 0 32 0;
+#X connect 31 0 24 0;
+#X connect 32 0 33 0;
+#X connect 33 0 34 0;
+#X connect 34 0 35 0;
+#X connect 35 0 36 0;
+#X connect 36 0 37 0;
+#X connect 36 1 38 0;
+#X connect 37 0 40 0;
+#X connect 38 0 40 0;
+#X connect 41 0 20 0;
+#X connect 41 0 7 0;
+#X connect 44 0 53 0;
+#X connect 45 0 46 0;
+#X connect 46 0 21 0;
+#X connect 47 0 8 0;
+#X connect 48 0 49 1;
+#X connect 48 0 30 0;
+#X connect 49 0 50 0;
+#X connect 50 0 30 0;
+#X connect 51 0 50 1;
+#X connect 51 0 46 1;
+#X connect 52 0 48 0;
+#X connect 53 0 45 0;
+#X connect 54 0 49 0;
+#X connect 55 0 54 0;
+#X restore 25 281 pd input-audio;
+#X obj 38 144 setctl \$0-port;
+#X obj 35 334 quacktrip~;
+#N canvas 420 73 668 550 to-quacktrip 0;
+#X obj 20 512 outlet;
+#X obj 134 371 sel 1 0;
+#X msg 153 435 off;
+#X obj 466 407 r \$0-fifo-size;
+#X msg 466 436 nbuf \$1;
+#X msg 188 437 block \$1;
+#X msg 282 439 nchan \$1;
+#X obj 188 407 r \$0-block;
+#X obj 134 344 r \$0-onoff;
+#X obj 282 409 r \$0-nchan;
+#X msg 379 438 repeat \$1;
+#X obj 377 410 r \$0-2x;
+#X msg 34 432 client \$2 \$3;
+#X obj 79 167 r \$0-server;
+#X obj 37 400 pack 0 s 0;
+#X obj 120 198 r \$0-port;
+#X obj 138 229 r \$0-this-caller;
+#X obj 137 255 t b f;
+#X obj 111 291 +;
+#X floatatom 123 316 6 0 0 0 - - -;
+#X connect 1 0 14 0;
+#X connect 1 1 2 0;
+#X connect 2 0 0 0;
+#X connect 3 0 4 0;
+#X connect 4 0 0 0;
+#X connect 5 0 0 0;
+#X connect 6 0 0 0;
+#X connect 7 0 5 0;
+#X connect 8 0 1 0;
+#X connect 9 0 6 0;
+#X connect 10 0 0 0;
+#X connect 11 0 10 0;
+#X connect 12 0 0 0;
+#X connect 13 0 14 1;
+#X connect 14 0 12 0;
+#X connect 15 0 18 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 17 1 18 1;
+#X connect 18 0 14 2;
+#X connect 18 0 19 0;
+#X restore 135 300 pd to-quacktrip;
+#X obj 90 425 loadbang;
+#X obj 15 447 f \$0;
+#X obj 58 449 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 38 169 setctl \$0-this-caller;
+#X obj 261 227 samplerate~;
+#X obj 261 252 s \$0-local-sr-set;
+#X obj 270 306 s \$0-local-ch-set;
+#X obj 259 66 r \$0-blksel;
+#X obj 259 91 sel 0 1;
+#X msg 259 116 64;
+#X msg 289 116 128;
+#X msg 319 116 256;
+#X obj 259 141 s \$0-block;
+#X obj 261 174 loadbang;
+#X obj 261 199 metro 1000;
+#X obj 269 281 r \$0-nchan;
+#X obj 366 73 r \$0-block;
+#X obj 366 97 s \$0-local-blk-set;
+#X obj 49 375 route got-packet drop late miss request-call no-peer-yet
+running bw, f 68;
+#X obj 320 404 unpack;
+#X obj 361 449 s \$0-local-mbits-set;
+#X obj 320 489 s \$0-remote-mbits-set;
+#X floatatom 31 479 5 0 0 0 - - -;
+#X obj 140 333 print to-q;
+#X msg 90 447 bang \; pd dsp 1;
+#X msg 15 526 \; \$1-server symbol 164.107.176.180 \; \$1-port 10000
+\; \$1-this-caller 1 \; \$1-nchan 1 \; \$1-block 64;
+#X obj 366 140 loadbang;
+#X msg 366 184 \; \$1-server symbol \$2 \; \$1-port \$3;
+#X obj 366 162 list append \$0 164.107.176.181 10000;
+#X connect 7 0 9 0;
+#X connect 7 1 9 1;
+#X connect 9 2 29 0;
+#X connect 10 0 9 2;
+#X connect 11 0 35 0;
+#X connect 12 0 36 0;
+#X connect 12 0 33 0;
+#X connect 13 0 12 0;
+#X connect 15 0 16 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 19 1 21 0;
+#X connect 19 2 22 0;
+#X connect 20 0 23 0;
+#X connect 21 0 23 0;
+#X connect 22 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 15 0;
+#X connect 26 0 17 0;
+#X connect 27 0 28 0;
+#X connect 29 7 30 0;
+#X connect 30 0 32 0;
+#X connect 30 1 31 0;
+#X connect 35 0 13 0;
+#X connect 37 0 39 0;
+#X connect 39 0 38 0;
+#X restore 1200 435 pd stuff;
+#X text 1015 383 Based on Netty mcnetface \, version 0.6 by Miller
+Puckette, f 30;
+#X text 543 24 fdch.github.io/Netty;
+#X text 527 9 A Netty McNetface plugin;
+#X floatatom 19 86 3 0 100 0 - 1-lvl-set 1-lvl;
+#X obj 19 107 bng 15 250 50 0 1-mute 1-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 12 141 hsl 20 12 1 9 0 0 1-pan 1-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 16 155 bng 12 250 50 0 1-ctr-pan 1-ctr-pan-set empty 0 0 0 12
+-262144 -1 -1;
+#X obj 93 72 vu 8 80 1-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 38 103 mute;
+#X obj 108 72 vu 8 80 1-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 45 85 level;
+#X floatatom 89 156 2 1 99 0 - 1-ch1-set 1-ch1;
+#X floatatom 105 156 2 1 99 0 - 1-ch2-set 1-ch2;
+#X text 14 167 mono;
+#X obj 47 169 tgl 15 0 1-mono 1-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 70 155 ch;
+#X text 7 124 balance;
+#X floatatom 71 241 7 0 0 0 - 1-packets-in-set 1-packets-in;
+#X floatatom 71 263 5 0 0 0 - 1-dropouts-set 1-dropouts;
+#X floatatom 69 218 5 0 0 0 - 1-nfill-set 1-nfill;
+#X text 31 219 fill;
+#X obj 73 284 bng 15 250 50 0 1-reset 1-reset-set empty 17 7 0 10 -262144
+-1 -1;
+#X text 32 282 reset;
+#X floatatom 7 344 5 0 0 0 - 1-remote-sr-set 1-remote-sr;
+#X floatatom 60 345 3 0 0 0 - 1-remote-ch-set 1-remote-ch;
+#X floatatom 7 402 3 0 0 0 - 1-remote-blk-set 1-remote-blk;
+#X text 6 310 sample rate, f 6;
+#X text 7 367 block size, f 5;
+#X text 54 324 channels;
+#X text 56 367 mbits per sec, f 7;
+#X floatatom 59 402 5 0 0 0 - 1-remote-mbits-set 1-remote-mbits;
+#X text 6 262 dropouts;
+#X floatatom 43 57 5 0 0 0 - 1-fifo-size-set 1-fifo-size;
+#X text 4 57 FIFO;
+#X text 12 240 packets;
+#X text 8 198 ---readouts---;
+#X text 119 44 ||||||||||||||||||||||||||||||||, f 1;
+#X floatatom 139 86 3 0 100 0 - 2-lvl-set 2-lvl;
+#X obj 139 107 bng 15 250 50 0 2-mute 2-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 132 141 hsl 20 12 1 9 0 0 2-pan 2-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 136 155 bng 12 250 50 0 2-ctr-pan 2-ctr-pan-set empty 0 0 0
+12 -262144 -1 -1;
+#X obj 213 72 vu 8 80 2-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 158 103 mute;
+#X obj 228 72 vu 8 80 2-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 165 85 level;
+#X floatatom 209 156 2 1 99 0 - 2-ch1-set 2-ch1;
+#X floatatom 225 156 2 1 99 0 - 2-ch2-set 2-ch2;
+#X text 134 167 mono;
+#X obj 167 169 tgl 15 0 2-mono 2-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 190 155 ch;
+#X text 127 124 balance;
+#X floatatom 191 241 7 0 0 0 - 2-packets-in-set 2-packets-in;
+#X floatatom 191 263 5 0 0 0 - 2-dropouts-set 2-dropouts;
+#X floatatom 189 218 5 0 0 0 - 2-nfill-set 2-nfill;
+#X text 151 219 fill;
+#X obj 193 284 bng 15 250 50 0 2-reset 2-reset-set empty 17 7 0 10
+-262144 -1 -1;
+#X text 152 282 reset;
+#X floatatom 127 344 5 0 0 0 - 2-remote-sr-set 2-remote-sr;
+#X floatatom 180 345 3 0 0 0 - 2-remote-ch-set 2-remote-ch;
+#X floatatom 127 402 3 0 0 0 - 2-remote-blk-set 2-remote-blk;
+#X text 126 310 sample rate, f 6;
+#X text 127 367 block size, f 5;
+#X text 174 324 channels;
+#X text 176 367 mbits per sec, f 7;
+#X floatatom 179 402 5 0 0 0 - 2-remote-mbits-set 2-remote-mbits;
+#X text 126 262 dropouts;
+#X floatatom 163 57 5 0 0 0 - 2-fifo-size-set 2-fifo-size;
+#X text 126 57 FIFO;
+#X text 132 240 packets;
+#X text 128 198 ---readouts---;
+#X text 240 44 ||||||||||||||||||||||||||||||||, f 1;
+#X floatatom 259 86 3 0 100 0 - 3-lvl-set 3-lvl;
+#X obj 259 107 bng 15 250 50 0 3-mute 3-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 252 141 hsl 20 12 1 9 0 0 3-pan 3-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 256 155 bng 12 250 50 0 3-ctr-pan 3-ctr-pan-set empty 0 0 0
+12 -262144 -1 -1;
+#X obj 333 72 vu 8 80 3-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 278 103 mute;
+#X obj 348 72 vu 8 80 3-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 285 85 level;
+#X floatatom 329 156 2 1 99 0 - 3-ch1-set 3-ch1;
+#X floatatom 345 156 2 1 99 0 - 3-ch2-set 3-ch2;
+#X text 254 167 mono;
+#X obj 287 169 tgl 15 0 3-mono 3-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 310 155 ch;
+#X text 247 124 balance;
+#X floatatom 311 241 7 0 0 0 - 3-packets-in-set 3-packets-in;
+#X floatatom 311 263 5 0 0 0 - 3-dropouts-set 3-dropouts;
+#X floatatom 309 218 5 0 0 0 - 3-nfill-set 3-nfill;
+#X text 271 219 fill;
+#X obj 313 284 bng 15 250 50 0 3-reset 3-reset-set empty 17 7 0 10
+-262144 -1 -1;
+#X text 272 282 reset;
+#X floatatom 247 344 5 0 0 0 - 3-remote-sr-set 3-remote-sr;
+#X floatatom 300 345 3 0 0 0 - 3-remote-ch-set 3-remote-ch;
+#X floatatom 247 402 3 0 0 0 - 3-remote-blk-set 3-remote-blk;
+#X text 246 310 sample rate, f 6;
+#X text 247 367 block size, f 5;
+#X text 294 324 channels;
+#X text 296 367 mbits per sec, f 7;
+#X floatatom 299 402 5 0 0 0 - 3-remote-mbits-set 3-remote-mbits;
+#X text 246 262 dropouts;
+#X floatatom 283 57 5 0 0 0 - 3-fifo-size-set 3-fifo-size;
+#X text 246 57 FIFO;
+#X text 252 240 packets;
+#X text 248 198 ---readouts---;
+#X text 360 44 ||||||||||||||||||||||||||||||||, f 1;
+#X floatatom 379 86 3 0 100 0 - 4-lvl-set 4-lvl;
+#X obj 379 107 bng 15 250 50 0 4-mute 4-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 372 141 hsl 20 12 1 9 0 0 4-pan 4-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 376 155 bng 12 250 50 0 4-ctr-pan 4-ctr-pan-set empty 0 0 0
+12 -262144 -1 -1;
+#X obj 453 72 vu 8 80 4-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 398 103 mute;
+#X obj 468 72 vu 8 80 4-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 405 85 level;
+#X floatatom 449 156 2 1 99 0 - 4-ch1-set 4-ch1;
+#X floatatom 465 156 2 1 99 0 - 4-ch2-set 4-ch2;
+#X text 374 167 mono;
+#X obj 407 169 tgl 15 0 4-mono 4-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 430 155 ch;
+#X text 367 124 balance;
+#X floatatom 431 241 7 0 0 0 - 4-packets-in-set 4-packets-in;
+#X floatatom 431 263 5 0 0 0 - 4-dropouts-set 4-dropouts;
+#X floatatom 429 218 5 0 0 0 - 4-nfill-set 4-nfill;
+#X text 391 219 fill;
+#X obj 433 284 bng 15 250 50 0 4-reset 4-reset-set empty 17 7 0 10
+-262144 -1 -1;
+#X text 392 282 reset;
+#X floatatom 367 344 5 0 0 0 - 4-remote-sr-set 4-remote-sr;
+#X floatatom 420 345 3 0 0 0 - 4-remote-ch-set 4-remote-ch;
+#X floatatom 367 402 3 0 0 0 - 4-remote-blk-set 4-remote-blk;
+#X text 366 310 sample rate, f 6;
+#X text 367 367 block size, f 5;
+#X text 414 324 channels;
+#X text 416 367 mbits per sec, f 7;
+#X floatatom 419 402 5 0 0 0 - 4-remote-mbits-set 4-remote-mbits;
+#X text 366 262 dropouts;
+#X floatatom 403 57 5 0 0 0 - 4-fifo-size-set 4-fifo-size;
+#X text 366 57 FIFO;
+#X text 372 240 packets;
+#X text 368 198 ---readouts---;
+#X text 478 44 ||||||||||||||||||||||||||||||||, f 1;
+#X floatatom 499 86 3 0 100 0 - 5-lvl-set 5-lvl;
+#X obj 499 107 bng 15 250 50 0 5-mute 5-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 492 141 hsl 20 12 1 9 0 0 5-pan 5-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 496 155 bng 12 250 50 0 5-ctr-pan 5-ctr-pan-set empty 0 0 0
+12 -262144 -1 -1;
+#X obj 573 72 vu 8 80 5-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 518 103 mute;
+#X obj 588 72 vu 8 80 5-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 525 85 level;
+#X floatatom 569 156 2 1 99 0 - 5-ch1-set 5-ch1;
+#X floatatom 585 156 2 1 99 0 - 5-ch2-set 5-ch2;
+#X text 494 167 mono;
+#X obj 527 169 tgl 15 0 5-mono 5-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 550 155 ch;
+#X text 487 124 balance;
+#X floatatom 551 241 7 0 0 0 - 5-packets-in-set 5-packets-in;
+#X floatatom 551 263 5 0 0 0 - 5-dropouts-set 5-dropouts;
+#X floatatom 549 218 5 0 0 0 - 5-nfill-set 5-nfill;
+#X text 511 219 fill;
+#X obj 553 284 bng 15 250 50 0 5-reset 5-reset-set empty 17 7 0 10
+-262144 -1 -1;
+#X text 512 282 reset;
+#X floatatom 487 344 5 0 0 0 - 5-remote-sr-set 5-remote-sr;
+#X floatatom 540 345 3 0 0 0 - 5-remote-ch-set 5-remote-ch;
+#X floatatom 487 402 3 0 0 0 - 5-remote-blk-set 5-remote-blk;
+#X text 486 310 sample rate, f 6;
+#X text 487 367 block size, f 5;
+#X text 534 324 channels;
+#X text 536 367 mbits per sec, f 7;
+#X floatatom 539 402 5 0 0 0 - 5-remote-mbits-set 5-remote-mbits;
+#X text 486 262 dropouts;
+#X floatatom 523 57 5 0 0 0 - 5-fifo-size-set 5-fifo-size;
+#X text 486 57 FIFO;
+#X text 492 240 packets;
+#X text 488 198 ---readouts---;
+#X text 599 44 ||||||||||||||||||||||||||||||||, f 1;
+#X floatatom 619 86 3 0 100 0 - 6-lvl-set 6-lvl;
+#X obj 619 107 bng 15 250 50 0 6-mute 6-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 612 141 hsl 20 12 1 9 0 0 6-pan 6-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 616 155 bng 12 250 50 0 6-ctr-pan 6-ctr-pan-set empty 0 0 0
+12 -262144 -1 -1;
+#X obj 693 72 vu 8 80 6-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 638 103 mute;
+#X obj 708 72 vu 8 80 6-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 645 85 level;
+#X floatatom 689 156 2 1 99 0 - 6-ch1-set 6-ch1;
+#X floatatom 705 156 2 1 99 0 - 6-ch2-set 6-ch2;
+#X text 614 167 mono;
+#X obj 647 169 tgl 15 0 6-mono 6-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 670 155 ch;
+#X text 607 124 balance;
+#X floatatom 671 241 7 0 0 0 - 6-packets-in-set 6-packets-in;
+#X floatatom 671 263 5 0 0 0 - 6-dropouts-set 6-dropouts;
+#X floatatom 669 218 5 0 0 0 - 6-nfill-set 6-nfill;
+#X text 631 219 fill;
+#X obj 673 284 bng 15 250 50 0 6-reset 6-reset-set empty 17 7 0 10
+-262144 -1 -1;
+#X text 632 282 reset;
+#X floatatom 607 344 5 0 0 0 - 6-remote-sr-set 6-remote-sr;
+#X floatatom 660 345 3 0 0 0 - 6-remote-ch-set 6-remote-ch;
+#X floatatom 607 402 3 0 0 0 - 6-remote-blk-set 6-remote-blk;
+#X text 606 310 sample rate, f 6;
+#X text 607 367 block size, f 5;
+#X text 654 324 channels;
+#X text 656 367 mbits per sec, f 7;
+#X floatatom 659 402 5 0 0 0 - 6-remote-mbits-set 6-remote-mbits;
+#X text 606 262 dropouts;
+#X floatatom 643 57 5 0 0 0 - 6-fifo-size-set 6-fifo-size;
+#X text 606 57 FIFO;
+#X text 612 240 packets;
+#X text 608 198 ---readouts---;
+#X text 720 44 ||||||||||||||||||||||||||||||||, f 1;
+#X floatatom 739 86 3 0 100 0 - 7-lvl-set 7-lvl;
+#X obj 739 107 bng 15 250 50 0 7-mute 7-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 732 141 hsl 20 12 1 9 0 0 7-pan 7-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 736 155 bng 12 250 50 0 7-ctr-pan 7-ctr-pan-set empty 0 0 0
+12 -262144 -1 -1;
+#X obj 813 72 vu 8 80 7-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 758 103 mute;
+#X obj 828 72 vu 8 80 7-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 765 85 level;
+#X floatatom 809 156 2 1 99 0 - 7-ch1-set 7-ch1;
+#X floatatom 825 156 2 1 99 0 - 7-ch2-set 7-ch2;
+#X text 734 167 mono;
+#X obj 767 169 tgl 15 0 7-mono 7-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 790 155 ch;
+#X text 727 124 balance;
+#X floatatom 791 241 7 0 0 0 - 7-packets-in-set 7-packets-in;
+#X floatatom 791 263 5 0 0 0 - 7-dropouts-set 7-dropouts;
+#X floatatom 789 218 5 0 0 0 - 7-nfill-set 7-nfill;
+#X text 751 219 fill;
+#X obj 793 284 bng 15 250 50 0 7-reset 7-reset-set empty 17 7 0 10
+-262144 -1 -1;
+#X text 752 282 reset;
+#X floatatom 727 344 5 0 0 0 - 7-remote-sr-set 7-remote-sr;
+#X floatatom 780 345 3 0 0 0 - 7-remote-ch-set 7-remote-ch;
+#X floatatom 727 402 3 0 0 0 - 7-remote-blk-set 7-remote-blk;
+#X text 726 310 sample rate, f 6;
+#X text 727 367 block size, f 5;
+#X text 774 324 channels;
+#X text 776 367 mbits per sec, f 7;
+#X floatatom 779 402 5 0 0 0 - 7-remote-mbits-set 7-remote-mbits;
+#X text 726 262 dropouts;
+#X floatatom 763 57 5 0 0 0 - 7-fifo-size-set 7-fifo-size;
+#X text 726 57 FIFO;
+#X text 732 240 packets;
+#X text 728 198 ---readouts---;
+#X text 840 44 ||||||||||||||||||||||||||||||||, f 1;
+#X floatatom 859 86 3 0 100 0 - 8-lvl-set 8-lvl;
+#X obj 859 107 bng 15 250 50 0 8-mute 8-mute-set empty 0 0 0 12 -262144
+-1 -1;
+#X obj 852 141 hsl 20 12 1 9 0 0 8-pan 8-pan-set empty 0 0 0 10 -262144
+-1 -1 950 1;
+#X obj 856 155 bng 12 250 50 0 8-ctr-pan 8-ctr-pan-set empty 0 0 0
+12 -262144 -1 -1;
+#X obj 933 72 vu 8 80 8-vu1 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 878 103 mute;
+#X obj 948 72 vu 8 80 8-vu2 empty -1 -8 0 10 -66577 -1 0 0;
+#X text 885 85 level;
+#X floatatom 929 156 2 1 99 0 - 8-ch1-set 8-ch1;
+#X floatatom 945 156 2 1 99 0 - 8-ch2-set 8-ch2;
+#X text 854 167 mono;
+#X obj 887 169 tgl 15 0 8-mono 8-mono-set empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 910 155 ch;
+#X text 847 124 balance;
+#X floatatom 911 241 7 0 0 0 - 8-packets-in-set 8-packets-in;
+#X floatatom 911 263 5 0 0 0 - 8-dropouts-set 8-dropouts;
+#X floatatom 909 218 5 0 0 0 - 8-nfill-set 8-nfill;
+#X text 871 219 fill;
+#X obj 913 284 bng 15 250 50 0 8-reset 8-reset-set empty 17 7 0 10
+-262144 -1 -1;
+#X text 872 282 reset;
+#X floatatom 847 344 5 0 0 0 - 8-remote-sr-set 8-remote-sr;
+#X floatatom 900 345 3 0 0 0 - 8-remote-ch-set 8-remote-ch;
+#X floatatom 847 402 3 0 0 0 - 8-remote-blk-set 8-remote-blk;
+#X text 846 310 sample rate, f 6;
+#X text 847 367 block size, f 5;
+#X text 894 324 channels;
+#X text 896 367 mbits per sec, f 7;
+#X floatatom 899 402 5 0 0 0 - 8-remote-mbits-set 8-remote-mbits;
+#X text 846 262 dropouts;
+#X floatatom 883 57 5 0 0 0 - #0-fifo-size-set #0-fifo-size;
+#X text 846 57 FIFO;
+#X text 852 240 packets;
+#X text 848 198 ---readouts---;
+#X text 958 44 ||||||||||||||||||||||||||||||||, f 1;
+#X text 974 45 ON/OFF;
+#N canvas 0 39 962 566 README 0;
+#X text 24 49 This patch allows up to eight participants to share audio
+in real time through a repeater that should be run on a publicly-accessible
+server. (The server should run the patch named "netty-mcserver" \,
+which can be invoked remotely with the command "[path]/pd -nosound
+-nogui -nrt netty-mcserver.pd" \, and should have UDP ports 10000-10100
+open assuming the base port number is 10000). Each group of up to 8
+callers requires its own instance of the server.;
+#X text 20 186 Each caller gives him/herself a number from 1 to 8 that
+determines which channel they will show up at on everyone's copy of
+the patch (including their own). Make sure no two callers are trying
+to use the same channel. Also decide on a sample rate everyone will
+use (set in Pd's audio settings dialogs).;
+#X text 492 250 VU meters on both inputs and outputs are post-fader.
+They clip at the top (not at the first red LED).;
+#X obj 491 446 f \$0;
+#X obj 493 423 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 490 472 \; \$1-server symbol localhost \; \$1-this-caller 1
+;
+#X obj 718 444 f \$0;
+#X obj 720 420 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 717 470 \; \$1-server symbol localhost \; \$1-this-caller 2
+;
+#X text 99 21 netty mcnetface (8/2020);
+#X text 491 130 You can change the FIFO size individually on all the
+channels you're listening to. Typical values range from 20 to 50...
+the size is in units of 64-sample blocks (1.45 or 1.33 millseconds
+at 44100 or 48000 sample rate).;
+#X text 490 198 Each mixer channel can be set to mono (to pan a mono
+signal to both output channels) or stereo. The two outputs may be sent
+to individually chosen audio outputs.;
+#X text 20 287 Once the server is running \, callers may join and leave
+the call at will using the ON/OFF control. Before starting a call \,
+set the host address \, the base port number (if it's different from
+10000) and their channel ("this caller" \, from 1 to 8). Other controls
+in the right hand side of the patch are for sending audio (number of
+channels \, block size \, "2x" to repeat each sent packet twice \,
+level (from 0 to 100 with 50 for unit gain) and "test" to send a tone
+instead of your audio input.;
+#X text 20 427 At bottom right you can see statistics about what you
+are sending. These are readouts only. (To change cample rate \, go
+to Pd's audio settings panel \, not this patch.);
+#X text 494 41 The eight mixer channels control how (and whether) you
+will hear yourself and the other participants. You will appear on the
+channel you selected when making the call. You can quickly test audio
+by turning on the test tone at right and turning your own input channel
+up.;
+#X text 482 361 These two buttons are for testing - they place calls
+to a netty-mcserver on this same machine - run all three patches at
+once \, preferably on separate copies of Pd:;
+#X connect 3 0 5 0;
+#X connect 4 0 3 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X restore 1139 435 pd README;
+#X coords 0 -1 1 1 1250 430 1 2 2;

@@ -1,0 +1,9 @@
+type effect;
+bus 2 2;
+code nSud;
+param -name ip-1-set -label num -min 0 -max 999 -default 164;
+param -name ip-2-set -label num -min 0 -max 999 -default 107;
+param -name ip-3-set -label num -min 0 -max 999 -default 176;
+param -name ip-4-set -label num -min 0 -max 999 -default 180;
+param -name port-set -label num -min 10000 -max 999999 -default 10000;
+description Infos.txt;
