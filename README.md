@@ -9,7 +9,7 @@ Head to the [releases](https://github.com/fdch/Netty/releases) pages to get the 
 Version: 0.1
 Author: ffddcchh
 
-Based on [quacktrip\~](http://msp.ucsd.edu/tools/quacktrip/) by Miller Puckette. Made with [Camomile](https://github.com/pierreguillot/Camomile) by Pierre Guillot.
+Based on [Netty McNetface](http://msp.ucsd.edu/tools/quacktrip/) by Miller Puckette. Made with [Camomile](https://github.com/pierreguillot/Camomile) by Pierre Guillot.
 
 Many thanks to Miller Puckette and the Pure Data team, 
 Marc Ainger for testing and support, 
