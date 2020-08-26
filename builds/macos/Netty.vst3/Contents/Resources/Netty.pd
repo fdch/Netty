@@ -1,8 +1,8 @@
-#N canvas 5 0 1265 473 10;
+#N canvas 3 72 1265 473 10;
 #X declare -path lib/quacktrip~ -path lib;
 #X text 994 184 server;
 #X symbolatom 997 204 32 0 0 0 - #0-server-set #0-server;
-#X obj 1026 45 tgl 15 0 \$0-onoff \$0-onoff-set empty 17 7 0 10 -262144
+#X obj 1027 32 tgl 15 0 \$0-onoff \$0-onoff-set empty 17 7 0 10 -262144
 -1 -1 0 1;
 #X obj 1043 122 vradio 15 1 0 3 \$0-blksel \$0-blksel-set empty 0 -8
 0 10 -262144 -1 -1 2;
@@ -10,7 +10,7 @@
 #X text 1060 135 128;
 #X text 1061 149 256;
 #X obj 996 119 vradio 15 1 0 3 \$0-nchan \$0-nchan-set empty 0 -8 0
-10 -262144 -1 -1 1;
+10 -262144 -1 -1 2;
 #X text 1013 116 0;
 #X text 1014 131 1;
 #X text 1014 146 2;
@@ -44,8 +44,8 @@
 #X text 1167 311 mbits per sec, f 7;
 #X text 1023 70 --- AUDIO TO SEND ---;
 #X text 1020 277 ------- readouts --------;
-#N canvas 475 79 605 619 stuff 0;
-#X obj 275 544 clone -s 1 receiver.guts 8 \$0;
+#N canvas 229 88 605 619 stuff 0;
+#X obj 260 540 clone -s 1 receiver.guts 8 \$0;
 #X obj 110 23 declare -path lib/quacktrip~ -path lib;
 #X obj 39 94 setctl \$0-onoff;
 #X obj 37 119 setctl \$0-server;
@@ -75,19 +75,11 @@
 #X obj 323 210 line~;
 #X obj 323 170 pack 0 30, f 5;
 #X obj 8 247 *~;
-#X obj 199 366 abs~;
-#X obj 199 391 slop~ 0 0 0.3 0 1e+09;
-#X obj 535 395 metro 100;
-#X obj 196 429 snapshot~;
 #X obj 196 454 rmstodb;
 #X obj 196 479 moses 1;
 #X msg 197 514 -100;
 #X obj 244 509 - 88;
 #X obj 113 250 *~;
-#X obj 536 367 loadbang;
-#X obj 364 364 abs~;
-#X obj 364 389 slop~ 0 0 0.3 0 1e+09;
-#X obj 361 427 snapshot~;
 #X obj 361 452 rmstodb;
 #X obj 361 477 moses 1;
 #X msg 362 512 -100;
@@ -109,6 +101,8 @@
 #X obj 53 142 *~ 0.03;
 #X obj 167 139 *~ 0.03;
 #X obj 166 114 osc~ 880;
+#X obj 199 366 env~ 4096;
+#X obj 364 364 env~ 4096;
 #X connect 0 0 2 0;
 #X connect 1 0 4 0;
 #X connect 2 0 15 0;
@@ -118,7 +112,7 @@
 #X connect 5 0 3 0;
 #X connect 6 1 2 1;
 #X connect 8 0 21 0;
-#X connect 8 0 45 1;
+#X connect 8 0 37 1;
 #X connect 9 0 10 0;
 #X connect 10 0 11 0;
 #X connect 12 0 13 0;
@@ -126,53 +120,46 @@
 #X connect 14 0 1 1;
 #X connect 14 0 6 0;
 #X connect 16 0 1 0;
-#X connect 17 0 41 0;
+#X connect 17 0 33 0;
 #X connect 19 0 21 1;
-#X connect 19 0 30 1;
+#X connect 19 0 26 1;
 #X connect 20 0 19 0;
-#X connect 21 0 42 0;
-#X connect 21 0 22 0;
+#X connect 21 0 34 0;
+#X connect 21 0 48 0;
 #X connect 22 0 23 0;
-#X connect 23 0 25 0;
-#X connect 24 0 25 0;
-#X connect 24 0 34 0;
-#X connect 25 0 26 0;
-#X connect 26 0 27 0;
+#X connect 23 0 24 0;
+#X connect 23 1 25 0;
+#X connect 24 0 31 0;
+#X connect 25 0 31 0;
+#X connect 26 0 35 0;
+#X connect 26 0 49 0;
 #X connect 27 0 28 0;
-#X connect 27 1 29 0;
-#X connect 28 0 39 0;
-#X connect 29 0 39 0;
-#X connect 30 0 43 0;
+#X connect 28 0 29 0;
+#X connect 28 1 30 0;
+#X connect 29 0 32 0;
 #X connect 30 0 32 0;
-#X connect 31 0 24 0;
-#X connect 32 0 33 0;
-#X connect 33 0 34 0;
-#X connect 34 0 35 0;
-#X connect 35 0 36 0;
-#X connect 36 0 37 0;
-#X connect 36 1 38 0;
-#X connect 37 0 40 0;
-#X connect 38 0 40 0;
-#X connect 41 0 20 0;
-#X connect 41 0 7 0;
-#X connect 44 0 53 0;
-#X connect 45 0 46 0;
-#X connect 46 0 21 0;
-#X connect 47 0 8 0;
-#X connect 48 0 49 1;
-#X connect 48 0 30 0;
-#X connect 49 0 50 0;
-#X connect 50 0 30 0;
-#X connect 51 0 50 1;
-#X connect 51 0 46 1;
-#X connect 52 0 48 0;
-#X connect 53 0 45 0;
-#X connect 54 0 49 0;
-#X connect 55 0 54 0;
+#X connect 33 0 20 0;
+#X connect 33 0 7 0;
+#X connect 36 0 45 0;
+#X connect 37 0 38 0;
+#X connect 38 0 21 0;
+#X connect 39 0 8 0;
+#X connect 40 0 41 1;
+#X connect 40 0 26 0;
+#X connect 41 0 42 0;
+#X connect 42 0 26 0;
+#X connect 43 0 42 1;
+#X connect 43 0 38 1;
+#X connect 44 0 40 0;
+#X connect 45 0 37 0;
+#X connect 46 0 41 0;
+#X connect 47 0 46 0;
+#X connect 48 0 22 0;
+#X connect 49 0 27 0;
 #X restore 25 281 pd input-audio;
 #X obj 38 144 setctl \$0-port;
 #X obj 35 334 quacktrip~;
-#N canvas 420 73 668 550 to-quacktrip 0;
+#N canvas 609 115 668 550 to-quacktrip 0;
 #X obj 20 512 outlet;
 #X obj 134 371 sel 1 0;
 #X msg 153 435 off;
@@ -242,17 +229,17 @@ running bw, f 68;
 #X floatatom 31 479 5 0 0 0 - - -;
 #X obj 140 333 print to-q;
 #X msg 90 447 bang \; pd dsp 1;
-#X msg 15 526 \; \$1-server symbol localhost \; \$1-port 10000
-\; \$1-this-caller 1 \; \$1-nchan 1 \; \$1-block 64;
-#X obj 366 140 loadbang;
-#X msg 366 184 \; \$1-server symbol \$2 \; \$1-port \$3;
-#X obj 366 162 list append \$0 localhost 10000;
+#X obj 261 572 dac~;
+#X msg 17 500 \; \$1-server symbol localhost \; \$1-port 10000 \; \$1-this-caller
+1 \; \$1-nchan 2 \; \$1-blksel 2 \; \$1-2x 0 \; enable-all-set 1;
+#X connect 0 0 36 0;
+#X connect 0 1 36 1;
 #X connect 7 0 9 0;
 #X connect 7 1 9 1;
 #X connect 9 2 29 0;
 #X connect 10 0 9 2;
 #X connect 11 0 35 0;
-#X connect 12 0 36 0;
+#X connect 12 0 37 0;
 #X connect 12 0 33 0;
 #X connect 13 0 12 0;
 #X connect 15 0 16 0;
@@ -271,13 +258,11 @@ running bw, f 68;
 #X connect 30 0 32 0;
 #X connect 30 1 31 0;
 #X connect 35 0 13 0;
-#X connect 37 0 39 0;
-#X connect 39 0 38 0;
 #X restore 1200 435 pd stuff;
 #X text 1015 383 Based on Netty mcnetface \, version 0.6 by Miller
 Puckette, f 30;
-#X text 543 24 fdch.github.io/Netty;
-#X text 527 9 A Netty McNetface plugin;
+#X text 1093 32 fdch.github.io/Netty;
+#X text 1082 12 A Netty McNetface plugin;
 #X floatatom 19 86 3 0 100 0 - 1-lvl-set 1-lvl;
 #X obj 19 107 bng 15 250 50 0 1-mute 1-mute-set empty 0 0 0 12 -262144
 -1 -1;
@@ -590,7 +575,7 @@ Puckette, f 30;
 #X text 852 240 packets;
 #X text 848 198 ---readouts---;
 #X text 958 44 ||||||||||||||||||||||||||||||||, f 1;
-#X text 974 45 ON/OFF;
+#X text 979 31 ON/OFF;
 #N canvas 0 39 962 566 README 0;
 #X text 24 49 This patch allows up to eight participants to share audio
 in real time through a repeater that should be run on a publicly-accessible
@@ -648,4 +633,31 @@ once \, preferably on separate copies of Pd:;
 #X connect 6 0 8 0;
 #X connect 7 0 6 0;
 #X restore 1139 435 pd README;
+#X obj 65 34 tgl 15 0 1-enable 1-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X text 6 32 ENABLE 1:;
+#X obj 195 34 tgl 15 0 2-enable 2-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 315 34 tgl 15 0 3-enable 3-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 435 34 tgl 15 0 4-enable 4-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 555 34 tgl 15 0 5-enable 5-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 675 34 tgl 15 0 6-enable 6-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 795 34 tgl 15 0 7-enable 7-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 915 34 tgl 15 0 8-enable 8-enable-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X text 136 32 ENABLE 2:;
+#X text 256 32 ENABLE 3:;
+#X text 376 32 ENABLE 4:;
+#X text 496 32 ENABLE 5:;
+#X text 616 32 ENABLE 6:;
+#X text 736 32 ENABLE 7:;
+#X text 856 32 ENABLE 8:;
+#X obj 154 9 tgl 15 0 enable-all enable-all-set empty 17 7 0 10 -262144
+-1 -1 0 1;
+#X text 78 7 ENABLE ALL:;
 #X coords 0 -1 1 1 1250 430 1 2 2;

@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 245.0, 74.0, 640.0, 480.0 ],
+		"rect" : [ 245.0, 74.0, 640.0, 463.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,12 +39,199 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-49",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 128.0, 42.0, 241.0, 60.0 ],
+					"text" : "Netty is a 2 channel plugin that sends audio over the internet to a server. Read the READMES to start a netty-mcserver.pd patch on a server"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 3,
+					"fontname" : "Arial",
+					"fontsize" : 16.0,
+					"id" : "obj-47",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 53.0, 11.0, 312.0, 24.0 ],
+					"text" : "Loading the Netty McServer VST plugin"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-45",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 319.0, 344.0, 150.0, 20.0 ],
+					"text" : "4) turn on to lisen!"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-43",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 413.0, 20.0, 150.0, 20.0 ],
+					"text" : "3) send some audio"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-38",
+					"linecount" : 6,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 364.950000000000045, 226.0, 240.0, 87.0 ],
+					"text" : "optional: start another call with another caller. If you enable incoming audio from only one player, this is useful to get only one caller on channels 1 2 (hint: you can make a mixer with players on independent channels)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-34",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 265.749999999999943, 317.0, 29.5, 22.0 ],
+					"text" : "+~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-33",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 220.25, 317.0, 29.5, 22.0 ],
+					"text" : "+~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-32",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 308.499999999999943, 226.0, 31.0, 22.0 ],
+					"text" : "plug"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"autosave" : 1,
+					"bgmode" : 0,
+					"border" : 0,
+					"clickthrough" : 0,
+					"id" : "obj-30",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 8,
+					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "signal", "signal", "", "list", "int", "", "", "" ],
+					"patching_rect" : [ 308.499999999999943, 252.5, 49.5, 22.0 ],
+					"save" : [ "#N", "vst~", "loaduniqueid", 0, ";" ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_invisible" : 1,
+							"parameter_longname" : "vst~[1]",
+							"parameter_shortname" : "vst~",
+							"parameter_type" : 3
+						}
+
+					}
+,
+					"saved_object_attributes" : 					{
+						"parameter_enable" : 1,
+						"parameter_mappable" : 0
+					}
+,
+					"snapshot" : 					{
+						"filetype" : "C74Snapshot",
+						"version" : 2,
+						"minorversion" : 0,
+						"name" : "snapshotlist",
+						"origin" : "vst~",
+						"type" : "list",
+						"subtype" : "Undefined",
+						"embed" : 1,
+						"snapshot" : 						{
+							"pluginname" : "Netty.vst",
+							"plugindisplayname" : "Netty",
+							"pluginsavedname" : "~/Documents/Netty/builds/macos/Netty.vst",
+							"pluginsaveduniqueid" : 0,
+							"version" : 1,
+							"isbank" : 0,
+							"isbase64" : 1,
+							"blob" : "115.CMlaKA....fQPMDZ....A31T0QF.A.fA....A.........................................vMVMjLg3B....OCEVau0VZrU1TkQGco41Yy4COvElbg01bu3COuLTXs8VaowVYSUFczklamMmO.."
+						}
+,
+						"snapshotlist" : 						{
+							"current_snapshot" : 0,
+							"entries" : [ 								{
+									"filetype" : "C74Snapshot",
+									"version" : 2,
+									"minorversion" : 0,
+									"name" : "Netty",
+									"origin" : "Netty.vst",
+									"type" : "VST",
+									"subtype" : "MidiEffect",
+									"embed" : 1,
+									"snapshot" : 									{
+										"pluginname" : "Netty.vst",
+										"plugindisplayname" : "Netty",
+										"pluginsavedname" : "~/Documents/Netty/builds/macos/Netty.vst",
+										"pluginsaveduniqueid" : 0,
+										"version" : 1,
+										"isbank" : 0,
+										"isbase64" : 1,
+										"blob" : "115.CMlaKA....fQPMDZ....A31T0QF.A.fA....A.........................................vMVMjLg3B....OCEVau0VZrU1TkQGco41Yy4COvElbg01bu3COuLTXs8VaowVYSUFczklamMmO.."
+									}
+,
+									"fileref" : 									{
+										"name" : "Netty",
+										"filename" : "Netty.maxsnap",
+										"filepath" : "~/Documents/Max 8/Snapshots",
+										"filepos" : -1,
+										"snapshotfileid" : "a8f3f0855eca5585f8ad24b03bcb4606"
+									}
+
+								}
+ ]
+						}
+
+					}
+,
+					"text" : "vst~",
+					"varname" : "vst~[1]",
+					"viewvisibility" : 0
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-27",
 					"maxclass" : "meter~",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 416.949999999999989, 114.0, 12.0, 66.0 ]
+					"patching_rect" : [ 411.949999999999989, 78.0, 12.0, 66.0 ]
 				}
 
 			}
@@ -55,7 +242,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 430.949999999999989, 114.0, 12.0, 66.0 ]
+					"patching_rect" : [ 425.949999999999989, 78.0, 12.0, 66.0 ]
 				}
 
 			}
@@ -67,7 +254,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 538.0, 259.0, 24.0, 24.0 ]
+					"patching_rect" : [ 289.249999999999943, 344.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -78,7 +265,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 527.0, 310.0, 29.5, 22.0 ],
+					"patching_rect" : [ 265.749999999999943, 381.0, 29.5, 22.0 ],
 					"text" : "*~"
 				}
 
@@ -90,7 +277,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 481.500000000000057, 310.0, 29.5, 22.0 ],
+					"patching_rect" : [ 220.25, 381.0, 29.5, 22.0 ],
 					"text" : "*~"
 				}
 
@@ -101,7 +288,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 210.0, 95.0, 150.0, 20.0 ],
+					"patching_rect" : [ 121.0, 163.0, 150.0, 20.0 ],
 					"text" : "2) open the plugin window"
 				}
 
@@ -112,7 +299,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 91.0, 38.0, 150.0, 20.0 ],
+					"patching_rect" : [ 97.0, 132.0, 150.0, 20.0 ],
 					"text" : "1) load the plugin"
 				}
 
@@ -124,7 +311,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 416.949999999999989, 323.0, 12.0, 66.0 ]
+					"patching_rect" : [ 61.0, 285.0, 12.0, 66.0 ]
 				}
 
 			}
@@ -135,7 +322,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 430.949999999999989, 323.0, 12.0, 66.0 ]
+					"patching_rect" : [ 75.0, 285.0, 12.0, 66.0 ]
 				}
 
 			}
@@ -145,7 +332,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 481.500000000000057, 359.0, 37.5, 22.0 ],
+					"patching_rect" : [ 220.25, 415.0, 37.5, 22.0 ],
 					"text" : "dac~"
 				}
 
@@ -158,7 +345,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 538.0, 94.0, 24.0, 24.0 ]
+					"patching_rect" : [ 534.5, 20.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -169,7 +356,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "signal" ],
-					"patching_rect" : [ 411.449999999999989, 69.0, 35.0, 22.0 ],
+					"patching_rect" : [ 408.449999999999989, 42.0, 35.0, 22.0 ],
 					"text" : "adc~"
 				}
 
@@ -181,7 +368,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 527.0, 145.0, 29.5, 22.0 ],
+					"patching_rect" : [ 524.0, 118.0, 29.5, 22.0 ],
 					"text" : "*~"
 				}
 
@@ -194,7 +381,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 121.0, 235.0, 57.0, 35.0 ],
+					"patching_rect" : [ 57.5, 67.0, 57.0, 35.0 ],
 					"text" : ";\rdsp start"
 				}
 
@@ -206,7 +393,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 121.0, 198.0, 58.0, 22.0 ],
+					"patching_rect" : [ 57.5, 42.0, 58.0, 22.0 ],
 					"text" : "loadbang"
 				}
 
@@ -218,7 +405,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 51.5, 38.0, 31.0, 22.0 ],
+					"patching_rect" : [ 57.5, 132.0, 31.0, 22.0 ],
 					"text" : "plug"
 				}
 
@@ -230,7 +417,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 481.5, 145.0, 29.5, 22.0 ],
+					"patching_rect" : [ 478.5, 118.0, 29.5, 22.0 ],
 					"text" : "*~"
 				}
 
@@ -242,7 +429,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 168.5, 94.0, 35.0, 22.0 ],
+					"patching_rect" : [ 79.5, 162.0, 35.0, 22.0 ],
 					"text" : "open"
 				}
 
@@ -259,7 +446,7 @@
 					"numoutlets" : 8,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "signal", "signal", "", "list", "int", "", "", "" ],
-					"patching_rect" : [ 411.449999999999989, 241.5, 49.5, 22.0 ],
+					"patching_rect" : [ 57.5, 237.5, 49.5, 22.0 ],
 					"save" : [ "#N", "vst~", "loaduniqueid", 0, ";" ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
@@ -341,17 +528,17 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-25", 0 ],
+					"destination" : [ "obj-33", 0 ],
 					"order" : 0,
-					"source" : [ "obj-1", 1 ]
+					"source" : [ "obj-1", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-26", 0 ],
+					"destination" : [ "obj-34", 0 ],
 					"order" : 0,
-					"source" : [ "obj-1", 0 ]
+					"source" : [ "obj-1", 1 ]
 				}
 
 			}
@@ -465,6 +652,41 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-33", 1 ],
+					"source" : [ "obj-30", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-34", 1 ],
+					"source" : [ "obj-30", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-30", 0 ],
+					"source" : [ "obj-32", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-26", 0 ],
+					"source" : [ "obj-33", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-25", 0 ],
+					"source" : [ "obj-34", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
 					"source" : [ "obj-4", 0 ]
 				}
@@ -487,6 +709,7 @@
  ],
 		"parameters" : 		{
 			"obj-1" : [ "vst~", "vst~", 0 ],
+			"obj-30" : [ "vst~[1]", "vst~", 0 ],
 			"parameterbanks" : 			{
 
 			}
